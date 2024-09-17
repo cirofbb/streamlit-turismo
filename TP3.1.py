@@ -4,23 +4,21 @@ import time
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Função para exibir o item 1
 def item1():
     st.title("Objetivo e Motivação")
     st.write("""
         ### Objetivo:
-        O objetivo deste dashboard é permitir a análise e visualização de dados a partir de arquivos CSV.
+        O objetivo deste dashboard é permitir a análise e visualização de dados a partir de arquivos CSV da sessão de turismo do site Data.Rio.
         Os usuários poderão carregar seus dados, aplicar filtros e selecionar colunas ou linhas para visualização.
         
-        *A motivação e outros detalhes serão fornecidos posteriormente.*
+        *A motivação da escolha dos dados é analisar a variação da taxa de ocupação média anual e mensal dos hotéis no Município do Rio de Janeiro entre 1997-2017 .*
     """)
 
-# Função para exibir o item 2
 def item2():
     st.title("Upload de Arquivo CSV")
     uploaded_file = st.file_uploader("Faça o upload do arquivo CSV", type=["csv"])
     if uploaded_file is not None:
-        # Carregar o CSV e armazenar no estado da sessão
+        # Carrega o CSV e armazenar no estado da sessão
         df = pd.read_csv(uploaded_file)
         st.session_state['df'] = df  # Armazena o DataFrame no session_state
         st.write("Dados carregados com sucesso!")
@@ -28,7 +26,6 @@ def item2():
     else:
         st.warning("Por favor, faça o upload de um arquivo CSV.")
 
-# Função para exibir o item 3
 def item3():
     if 'df' in st.session_state:  # Verifica se o DataFrame está no estado da sessão
         df = st.session_state['df']
@@ -71,12 +68,6 @@ def item4():
     else:
         st.warning("Nenhum dado disponível para download. Por favor, carregue e filtre os dados nos itens anteriores.")
 
-# Exemplo de integração com o session_state (assumindo que os dados filtrados já estão armazenados em 'df_filtered')
-st.session_state['df_filtered'] = pd.DataFrame({
-    'coluna1': [1, 2, 3],
-    'coluna2': ['A', 'B', 'C']
-})
-
 def item5():
     st.title("Barra de Progresso e Spinners")
     
@@ -87,16 +78,16 @@ def item5():
         with st.spinner('Carregando os dados...'):
             time.sleep(1)  # Simula um tempo de carregamento
             df = pd.read_csv(uploaded_file)
-            st.session_state['df'] = df  # Armazena o DataFrame no session_state
+            st.session_state['df'] = df
         
-        # Exibe a barra de progresso durante o processamento dos dados
+        # Exibe a barra de progresso
         progress_bar = st.progress(0)
         for percent_complete in range(100):
             time.sleep(0.01)  # Simula o processamento de dados
             progress_bar.progress(percent_complete + 1)
         
         st.success("Dados carregados com sucesso!")
-        st.dataframe(df)  # Exibe os dados carregados
+        st.dataframe(df)
 
 def item6():
     st.title("Color Picker")
@@ -107,11 +98,11 @@ def item6():
     if 'font_color' not in st.session_state:
         st.session_state['font_color'] = "#000000"  # Cor da fonte padrão: preto
 
-    # Color picker para escolher a cor de fundo
+    # Color picker para a cor de fundo
     bg_color = st.color_picker("Escolha a cor de fundo", st.session_state['bg_color'])
     st.session_state['bg_color'] = bg_color
     
-    # Color picker para escolher a cor da fonte
+    # Color picker para a cor da fonte
     font_color = st.color_picker("Escolha a cor das fontes", st.session_state['font_color'])
     st.session_state['font_color'] = font_color
 
@@ -142,7 +133,6 @@ def load_csv(file):
     df = pd.read_csv(file)
     return df
 
-# Função para exibir o item 7
 def item7():
     st.title("Funcionalidade de Cache")
     
@@ -151,12 +141,11 @@ def item7():
     if uploaded_file is not None:
         # Carrega os dados usando a função de cache
         df = load_csv(uploaded_file)
-        st.session_state['df'] = df  # Armazena o DataFrame no session_state
+        st.session_state['df'] = df
 
         st.write("Dados carregados com sucesso!")
-        st.dataframe(df)  # Exibe os dados carregados
+        st.dataframe(df)
 
-# Função para exibir o item 8
 def item8():
     st.title("Session State")
     
@@ -170,9 +159,8 @@ def item8():
     uploaded_file = st.file_uploader("Faça o upload do arquivo CSV", type=["csv"])
     
     if uploaded_file is not None:
-        # Carrega os dados usando a função de cache
         df = load_csv(uploaded_file)
-        st.session_state['df'] = df  # Armazena o DataFrame no session_state
+        st.session_state['df'] = df
 
         # Filtros
         st.write("Filtros")
@@ -200,9 +188,9 @@ def item8():
             df_filtered = df_filtered[selected_columns]
         
         st.write("Dados filtrados e selecionados")
-        st.dataframe(df_filtered)  # Exibe os dados filtrados
+        st.dataframe(df_filtered)
 
-        # Mostrar filtros aplicados
+        # Mostra filtros aplicados
         st.write("Filtros Aplicados:")
         st.write(st.session_state['filters'])
         st.write("Colunas Selecionadas:")
@@ -214,9 +202,8 @@ def item9():
     uploaded_file = st.file_uploader("Faça o upload do arquivo CSV", type=["csv"])
 
     if uploaded_file is not None:
-        # Carrega os dados usando a função de cache
         df = load_csv(uploaded_file)
-        st.session_state['df'] = df  # Armazena o DataFrame no session_state
+        st.session_state['df'] = df
 
         st.write("Tabela Interativa com Dados")
         
@@ -229,9 +216,8 @@ def item10():
     uploaded_file = st.file_uploader("Faça o upload do arquivo CSV", type=["csv"])
 
     if uploaded_file is not None:
-        # Carrega os dados usando a função de cache
         df = load_csv(uploaded_file)
-        st.session_state['df'] = df  # Armazena o DataFrame no session_state
+        st.session_state['df'] = df
         
         st.write("Escolha o tipo de gráfico para visualizar os dados")
 
@@ -271,9 +257,8 @@ def item11():
     uploaded_file = st.file_uploader("Faça o upload do arquivo CSV", type=["csv"])
 
     if uploaded_file is not None:
-        # Carrega os dados usando a função de cache
         df = load_csv(uploaded_file)
-        st.session_state['df'] = df  # Armazena o DataFrame no session_state
+        st.session_state['df'] = df
         
         st.write("Escolha o tipo de gráfico avançado para visualizar os dados")
 
@@ -309,9 +294,8 @@ def item12():
     uploaded_file = st.file_uploader("Faça o upload do arquivo CSV", type=["csv"])
 
     if uploaded_file is not None:
-        # Carrega os dados usando a função de cache
         df = load_csv(uploaded_file)
-        st.session_state['df'] = df  # Armazena o DataFrame no session_state
+        st.session_state['df'] = df
 
         st.write("Resumo das Métricas Básicas dos Dados")
 
