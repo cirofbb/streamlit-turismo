@@ -1,4 +1,5 @@
-# Dashboard de Análise de Dados de Turismo
+# streamlit-turismo
+### Dashboard de Análise de Dados de Turismo
 Este projeto é um dashboard interativo desenvolvido em Streamlit para análise e visualização de dados de turismo, com foco na taxa de ocupação hoteleira no Rio de Janeiro entre 1997-2017.
 
 ### Visão Geral
@@ -81,7 +82,7 @@ Execute o aplicativo:
 streamlit run TP3.1.py
 
 ### Estrutura do Projeto
-''' markdown
+```
 
 .
 ├── TP3.1.py                       # Aplicativo principal Streamlit
@@ -89,7 +90,7 @@ streamlit run TP3.1.py
 └── ocupação_média.csv             # Base de dados
 └── requirements.txt
 
-'''
+```
 ### Dependências
 - Python 3.7+
 
